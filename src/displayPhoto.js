@@ -27,8 +27,8 @@ return (
         <h1>{title}</h1>
         <h4>{date}</h4>
         <img src={imgData} />
-        <h3>{explanation}</h3>
-        <h5>{copyright}</h5>
+        <h3 className="explain">{explanation}</h3>
+        <p>{copyright}</p>
     </div>
     );
 }
