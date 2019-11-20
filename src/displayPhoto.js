@@ -1,25 +1,34 @@
 import React, {useState, useEffect} from 'react';
-import NasaPhoto from "./photo";
 import axios from 'axios'
 
 export default function DisplayPhoto() {
 
-const [nasaData, setNasaData] = useState();
-
+    const [imgData, setImgData] = useState();
+    const [date, setDate] = useState();
+    const [title, setTitle] = useState();
+    const [copyright, setCopyright] = useState();
+    const [explanation, setExplanation] = useState();
+    
     useEffect(() => {
     axios 
-        .get('https://api.nasa.gov/planetary/apod?api_key=vbimrN7Y9hTOMeCEpSFqkevoB1p3yRJv5UgNjz6P')
+        .get(`https://api.nasa.gov/planetary/apod?api_key=vbimrN7Y9hTOMeCEpSFqkevoB1p3yRJv5UgNjz6P`)
         .then(response => {
             console.log(response)
-            setNasaData(response.data.hdurl)
-        })
-    }, [])
+            setImgData(response.data.url)
+            setDate(response.data.date)
+            setTitle(response.data.title)
+            setCopyright(response.data.copyright)
+            setExplanation(response.data.explanation)
+        });
+    }, []);
 
 return (
     <div className="container">
-        {nasaData.map(url => {
-          return <NasaPhoto imgUrl={url} />
-        })}
-      </div>
+        <h1>{title}</h1>
+        <h4>{date}</h4>
+        <img src={imgData} />
+        <h3>{explanation}</h3>
+        <h5>{copyright}</h5>
+    </div>
     );
 }
