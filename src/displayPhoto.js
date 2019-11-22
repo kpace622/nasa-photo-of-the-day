@@ -1,5 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
+import styled from "styled-components"
+
+
+const BackgroundColor = styled.div`
+  background-color: #5d5c61;
+
+`;
+
+const H1styles = styled.h1`
+    padding: 20px;
+    color: #557a95;
+    margin: 0;
+    background-color: #b1a296;
+`
+
+const WordStyle = styled.h4`
+    color: #557a95;
+`
 
 export default function DisplayPhoto() {
 
@@ -23,12 +41,12 @@ export default function DisplayPhoto() {
     }, []);
 
 return (
-    <div className="container">
-        <h1>{title}</h1>
-        <h4>{date}</h4>
+    <BackgroundColor className="container">
+        <H1styles>{title}</H1styles>
+        <WordStyle>{date}</WordStyle>
         <img src={imgData} />
         <h3 className="explain">{explanation}</h3>
-        <p>{copyright}</p>
-    </div>
+        <WordStyle>{copyright}</WordStyle>
+    </BackgroundColor>
     );
 }

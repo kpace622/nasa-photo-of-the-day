@@ -32,6 +32,10 @@
   }
 }
 
+html {
+  background-color: #5d5c61;
+}
+
 .explain {
   margin-left: 25%;
   margin-right: 25%;
