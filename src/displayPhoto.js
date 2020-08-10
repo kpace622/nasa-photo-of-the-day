@@ -21,32 +21,27 @@ const WordStyle = styled.h4`
 
 export default function DisplayPhoto() {
 
-    const [imgData, setImgData] = useState();
-    const [date, setDate] = useState();
-    const [title, setTitle] = useState();
-    const [copyright, setCopyright] = useState();
-    const [explanation, setExplanation] = useState();
-    
+    const [imgData, setImgData] = useState({});
+
     useEffect(() => {
-    axios 
-        .get(`https://api.nasa.gov/planetary/apod?api_key=vbimrN7Y9hTOMeCEpSFqkevoB1p3yRJv5UgNjz6P`)
-        .then(response => {
-            console.log(response)
-            setImgData(response.data.url)
-            setDate(response.data.date)
-            setTitle(response.data.title)
-            setCopyright(response.data.copyright)
-            setExplanation(response.data.explanation)
-        });
-    }, []);
+        axios 
+            .get(`https://api.nasa.gov/planetary/apod?api_key=vbimrN7Y9hTOMeCEpSFqkevoB1p3yRJv5UgNjz6P`)
+            .then(response => {
+                setImgData(response.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+            }, []);
 
 return (
     <BackgroundColor className="container">
-        <H1styles>{title}</H1styles>
-        <WordStyle>{date}</WordStyle>
-        <img src={imgData} />
-        <h3 className="explain">{explanation}</h3>
-        <WordStyle>{copyright}</WordStyle>
+        {console.log(imgData)}
+        <H1styles>{imgData.title}</H1styles>
+        <WordStyle>{imgData.date}</WordStyle>
+        <img src={imgData.url} />
+        <h3 className="explain">{imgData.explanation}</h3>
+        <WordStyle>{imgData.copyright}</WordStyle>
     </BackgroundColor>
     );
 }
